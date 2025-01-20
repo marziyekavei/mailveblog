@@ -1,38 +1,15 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { fetchBlogs, selectAllBlogs } from '../reducers/blogSlice';
+import { useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import ShowTime from './ShowTime';
 import ShowAuthor from './ShowAuthor';
 import ReactionButtons from './ReactionButtons';
 import Spinner from './Spinner ';
+import { useGetBlogsQuery } from '../api/apiSlice';
 
-const BlogsList = () => {
-    const dispatch = useDispatch();
-
-    const navigate = useNavigate();
-
-    const blogs = useSelector(selectAllBlogs);
-    const blogStatus = useSelector((state) => state.blogs.status);
-    const error = useSelector((state) => state.error);
-
-    useEffect(() => {
-        console.log(blogStatus)
-        if (blogStatus === "idle") {
-            dispatch(fetchBlogs());
-        }
-    }, [blogStatus, dispatch]);
-
-    let content;
-    if (blogStatus === "loading") {
-        content = <Spinner text=' بارگزاری ... ' />;
-    } else if (blogStatus === "completed") {
-        const orderedBlogs = blogs
-            .slice()
-            .sort((a, b) => b.date.localeCompare(a.date));
-
-        content = orderedBlogs.map((blog) => (
-            <article className="blog-excerpt" key={blog.id}>
+let Blog = ({ blog }) => {
+    return (
+        <>
+            <article className="blog-excerpt">
                 <h3>{blog.title}</h3>
                 <div>
                     <ShowTime timestamp={blog.date} />
@@ -46,8 +23,34 @@ const BlogsList = () => {
                     دیدن کامل پست
                 </Link>
             </article>
-        ));
-    } else if (blogStatus === "failed") {
+        </>
+    )
+}
+
+const BlogsList = () => {
+    const {
+        data: blogs = [],
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useGetBlogsQuery();
+
+    const navigate = useNavigate();
+
+    const sortedBlogs = useMemo(() => {
+        const sortedBlogs = blogs.slice();
+        sortedBlogs.sort((a, b) => b.date.localCompare(a.date));
+        return sortedBlogs;
+    }, [blogs])
+
+    let content;
+    if (isLoading) {
+        content = <Spinner text=' بارگزاری ... ' />;
+    } else if (isSuccess) {
+        content = sortedBlogs.map((blog) => <Blog blog={blog} key={blog.id} />);
+    
+    } else if (isError) {
         content = <div>{error}</div>
     }
 

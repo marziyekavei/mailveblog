@@ -1,18 +1,18 @@
-import { parseISO, formatDistanceToNow } from 'date-fns-jalali';
+import { formatDistanceToNow } from 'date-fns-jalali';
 
 const ShowTime = ({ timestamp }) => {
-    let timeAgo = '';
-    if (timestamp) {
-        const date = parseISO(timestamp);
-        const time = formatDistanceToNow(date);
-        timeAgo=`${time} قبل`;
+    if (!timestamp || isNaN(new Date(timestamp))) {
+        console.error("Invalid timestamp:", timestamp);
+        return <span>تاریخ نامعتبر</span>;
     }
+
+    const timeAgo = formatDistanceToNow(new Date(timestamp));
 
     return (
         <span>
-            <i>{timeAgo}</i> &nbsp;&nbsp;
+            {timeAgo} پیش  &nbsp;
         </span>
-    )
-}
+    );
+};
 
 export default ShowTime;
