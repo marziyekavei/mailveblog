@@ -2,7 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://api.jsonbin.io/v3" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://api.jsonbin.io/v3"و,
+        prepareHeaders:(headers)=>{
+            headers.set("X-Master-Key", "$2a$10$RkuO3LKgEtgoy2YhCFuZS.7J6Lj5aWQXZJVDS9wjGNtEbJsMtG.Ze");
+            return headers;
+        }
+     }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
