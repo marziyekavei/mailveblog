@@ -14,22 +14,22 @@ export const getBlog = (blogId) => {
 
 
 export const getAllUsers = () => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e`;
+    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users`;
     return axios.get(url)
 };
 
 export const getUser = (userId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/${userId}`;
+    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users/${userId}`;
     return axios.get(url);
 };
 
 export const deleteUser = (userId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/${userId}`;
+    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users/${userId}`;
     return axios.delete(url);
 };
 
 export const createUser = (user) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e`;
+    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users`;
     return axios.post(url, user);
 };
 
