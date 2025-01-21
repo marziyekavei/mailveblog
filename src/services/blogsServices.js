@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = "https://my-json-server.typicode.com/marziyekavei/veblog";
+const SERVER_URL = "https://api.jsonbin.io/v3/b/678fb134ad19ca34f8f20c9e";
 
 export const getAllBlogs = () => {
     const url = `${SERVER_URL}/blogs`;
@@ -47,3 +47,5 @@ export const deleteBlog = (blogId) => {
     const url = `${SERVER_URL}/blogs/${blogId}`;
     return axios.delete(url);
 };
+
+//https://api.jsonbin.io/v3/b/678fb134ad19ca34f8f20c9e
