@@ -2,24 +2,24 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://api.jsonbin.io/v3/b/678fb134ad19ca34f8f20c9e" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://api.jsonbin.io/v3" }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
-            query: () => "/blogs",
+            query: () => "/b/678fb134ad19ca34f8f20c9e",
             providesTags: (result = [], error, arg) => [
                 "BLOG",
                 ...result.map(({ id }) => ({ type: "BLOG", id })),
             ]
         }),
         getBlog: builder.query({
-            query: (initialBlogId) => `/blogs/${initialBlogId}`,
+            query: (initialBlogId) => `/b/678fb134ad19ca34f8f20c9e/${initialBlogId}`,
             providesTags: (result, error, arg) =>
                 [{ type: "BLOG", id: arg }],
         }),
         addNewBlog: builder.mutation({
             query: inioalBlog => ({
-                url: "/blogs",
+                url: "/b/678fb134ad19ca34f8f20c9e",
                 method: "POST",
                 body: inioalBlog,
             }),
@@ -27,7 +27,7 @@ export const apiSlice = createApi({
         }),
         editBlog: builder.mutation({
             query: blog => ({
-                url: `/blogs/${blog.id}`,
+                url: `/b/678fb134ad19ca34f8f20c9e/${blog.id}`,
                 method: "PUT",
                 body: blog
             }),
@@ -36,7 +36,7 @@ export const apiSlice = createApi({
         }),
         deleteBlog: builder.mutation({
             query: blogId => ({
-                url: `/blogs/${blogId}`,
+                url: `/b/678fb134ad19ca34f8f20c9e/${blogId}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["BLOG"],
@@ -52,4 +52,5 @@ export const {
     useDeleteBlogMutation } = apiSlice;
 
     //https://my-json-server.typicode.com/marziyekavei/veblog
+    // "https://api.jsonbin.io/v3/b/678fb134ad19ca34f8f20c9e"
     
