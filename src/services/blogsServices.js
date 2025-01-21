@@ -1,57 +1,51 @@
 import axios from "axios";
-const API_KEY = "$2a$10$RkuO3LKgEtgoy2YhCFuZS.7J6Lj5aWQXZJVDS9wjGNtEbJsMtG.Ze";
 
-const SERVER_URL = "https://api.jsonbin.io/v3";
-
-const headers = {
-    "X-Master-Key": API_KEY,  // اضافه کردن X-Master-Key در هدر
-    "Content-Type": "application/json",  // تنظیم نوع محتوا
-};
+const SERVER_URL = "https://my-json-server.typicode.com/marziyekavei/veblog";
 
 export const getAllBlogs = () => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/blogs`;
-    return axios.get(url, {headers});
+    const url = `${SERVER_URL}/blogs`;
+    return axios.get(url);
 };
 
 export const getBlog = (blogId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/blogs/${blogId}`;
-    return axios.get(url, {headers});
+    const url = `${SERVER_URL}/blogs/${blogId}`;
+    return axios.get(url);
 };
 
 
 export const getAllUsers = () => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users`;
-    return axios.get(url, {headers})
+    const url = `${SERVER_URL}/users`;
+    return axios.get(url)
 };
 
 export const getUser = (userId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users/${userId}`;
-    return axios.get(url, {headers});
+    const url = `${SERVER_URL}/users/${userId}`;
+    return axios.get(url);
 };
 
 export const deleteUser = (userId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users/${userId}`;
-    return axios.delete(url, {headers});
+    const url = `${SERVER_URL}/users/${userId}`;
+    return axios.delete(url);
 };
 
 export const createUser = (user) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/users`;
-    return axios.post(url, user, {headers});
+    const url = `${SERVER_URL}/users`;
+    return axios.post(url, user);
 };
 
 export const createBlog = (blog) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/blogs`;
-    return axios.post(url, blog, {headers});
+    const url = `${SERVER_URL}/blogs`;
+    return axios.post(url, blog);
 };
 
 export const updateBlog = (blog, blogId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/blogs/${blogId}`;
-    return axios.put(url, blog, {headers});
+    const url = `${SERVER_URL}/blogs/${blogId}`;
+    return axios.put(url, blog);
 };
 
 export const deleteBlog = (blogId) => {
-    const url = `${SERVER_URL}/b/678fb134ad19ca34f8f20c9e/blogs/${blogId}`;
-    return axios.delete(url, {headers});
+    const url = `${SERVER_URL}/blogs/${blogId}`;
+    return axios.delete(url);
 };
 
 //https://api.jsonbin.io/v3/b/678fb134ad19ca34f8f20c9e

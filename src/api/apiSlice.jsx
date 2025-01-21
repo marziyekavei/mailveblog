@@ -2,29 +2,24 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://api.jsonbin.io/v3",
-        prepareHeaders:(headers)=>{
-            headers.set("X-Master-Key", "$2a$10$RkuO3LKgEtgoy2YhCFuZS.7J6Lj5aWQXZJVDS9wjGNtEbJsMtG.Ze");
-            return headers;
-        }
-     }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://my-json-server.typicode.com/marziyekavei/veblog" }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
-            query: () => "/b/678fb134ad19ca34f8f20c9e",
+            query: () => "/blogs",
             providesTags: (result = [], error, arg) => [
                 "BLOG",
                 ...result.map(({ id }) => ({ type: "BLOG", id })),
             ]
         }),
         getBlog: builder.query({
-            query: (initialBlogId) => `/b/678fb134ad19ca34f8f20c9e/${initialBlogId}`,
+            query: (initialBlogId) => `/blogs/${initialBlogId}`,
             providesTags: (result, error, arg) =>
                 [{ type: "BLOG", id: arg }],
         }),
         addNewBlog: builder.mutation({
             query: inioalBlog => ({
-                url: "/b/678fb134ad19ca34f8f20c9e",
+                url: "/blogs",
                 method: "POST",
                 body: inioalBlog,
             }),
@@ -32,7 +27,7 @@ export const apiSlice = createApi({
         }),
         editBlog: builder.mutation({
             query: blog => ({
-                url: `/b/678fb134ad19ca34f8f20c9e/${blog.id}`,
+                url: `/blogs/${blog.id}`,
                 method: "PUT",
                 body: blog
             }),
@@ -41,7 +36,7 @@ export const apiSlice = createApi({
         }),
         deleteBlog: builder.mutation({
             query: blogId => ({
-                url: `/b/678fb134ad19ca34f8f20c9e/${blogId}`,
+                url: `/blogs/${blogId}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["BLOG"],
@@ -57,5 +52,4 @@ export const {
     useDeleteBlogMutation } = apiSlice;
 
     //https://my-json-server.typicode.com/marziyekavei/veblog
-    // "https://api.jsonbin.io/v3/b/678fb134ad19ca34f8f20c9e"
     
