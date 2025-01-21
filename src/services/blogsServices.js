@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = "https://mockapi.io/clone/678fad8449875e5a1a92e893";
+const SERVER_URL = "https://my-json-server.typicode.com/marziyekavei/veblog";
 
 export const getAllBlogs = () => {
     const url = `${SERVER_URL}/blogs`;

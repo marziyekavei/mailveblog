@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://mockapi.io/clone/678fad8449875e5a1a92e893" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://my-json-server.typicode.com/marziyekavei/veblog" }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
@@ -52,4 +52,4 @@ export const {
     useDeleteBlogMutation } = apiSlice;
 
     //https://mockapi.io/clone/678fad8449875e5a1a92e893
-    //https://my-json-server.typicode.com/marziyekavei/veblog
+    //
