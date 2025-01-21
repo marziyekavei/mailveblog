@@ -1,8 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const SUPABASE_URL = "https://mcggfakkqawjnyaqqnju.supabase.co";
+const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jZ2dmYWtrcWF3am55YXFxbmp1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzczNzg4NTAsImV4cCI6MjA1Mjk1NDg1MH0.XOHfjWTcBlxxMM2TjgyWqnTEjH8m1OlWRTInr8KY_Xo";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://my-json-server.typicode.com/marziyekavei/veblog" }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: `${SUPABASE_URL}/rest/v1`,
+        prepareHeaders: (headers) => {
+            // افزودن هدر برای دسترسی به Supabase
+            headers.set('Authorization', `Bearer ${API_KEY}`);
+            headers.set('apikey', API_KEY);
+            return headers;
+        }
+    }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
@@ -13,7 +23,7 @@ export const apiSlice = createApi({
             ]
         }),
         getBlog: builder.query({
-            query: (initialBlogId) => `/blogs/${initialBlogId}`,
+            query: (initialBlogId) => `/blogs?id=eq.${initialBlogId}`,
             providesTags: (result, error, arg) =>
                 [{ type: "BLOG", id: arg }],
         }),
@@ -27,7 +37,7 @@ export const apiSlice = createApi({
         }),
         editBlog: builder.mutation({
             query: blog => ({
-                url: `/blogs/${blog.id}`,
+                url: `/blogs?id=eq.${blog.id}`,
                 method: "PUT",
                 body: blog
             }),
@@ -36,7 +46,7 @@ export const apiSlice = createApi({
         }),
         deleteBlog: builder.mutation({
             query: blogId => ({
-                url: `/blogs/${blogId}`,
+                url: `/blogs?id=eq.${blogId}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["BLOG"],
@@ -51,5 +61,4 @@ export const {
     useEditBlogMutation,
     useDeleteBlogMutation } = apiSlice;
 
-    //https://my-json-server.typicode.com/marziyekavei/veblog
-    
+//https://my-json-server.typicode.com/marziyekavei/veblog
