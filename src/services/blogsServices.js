@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = "https://my-json-server.typicode.com/marziyekavei/veblog";
+const SERVER_URL = "https://serverveblog-glvb0qrvt-marziekaveis-projects.vercel.app";
 
 export const getAllBlogs = () => {
     const url = `${SERVER_URL}/blogs`;
