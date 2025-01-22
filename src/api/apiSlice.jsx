@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://serverveblog-glvb0qrvt-marziekaveis-projects.vercel.app" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://my-json-server.typicode.com/marziyekavei/veblog" }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
@@ -52,5 +52,4 @@ export const {
     useDeleteBlogMutation } = apiSlice;
 
     //https://serverveblog-glvb0qrvt-marziekaveis-projects.vercel.app
-    //https://my-json-server.typicode.com/marziyekavei/veblog
     
