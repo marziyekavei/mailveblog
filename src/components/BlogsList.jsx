@@ -40,9 +40,15 @@ const BlogsList = () => {
 
     const sortedBlogs = useMemo(() => {
         const sortedBlogs = blogs.slice();
-        sortedBlogs.sort((a, b) => b.date.localCompare(a.date));
+        sortedBlogs.sort((a, b) => {
+            // اگر a.date و b.date از نوع تاریخ باشند، آن‌ها را به رشته تبدیل کن
+            const dateA = a.date ? new Date(a.date).toString() : "";
+            const dateB = b.date ? new Date(b.date).toString() : "";
+            return dateB.localeCompare(dateA);  // مقایسه به صورت نزولی
+        });
         return sortedBlogs;
-    }, [blogs])
+    }, [blogs]);
+    
 
     let content;
     if (isLoading) {
