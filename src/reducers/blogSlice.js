@@ -2,7 +2,11 @@ import { createSlice, nanoid, createAsyncThunk, current, createSelector, createE
 import { createBlog, deleteBlog, getAllBlogs, updateBlog } from '../services/blogsServices';
 
 const blogAdaptor = createEntityAdapter({
-    sortComparer: (a, b) => b.date.localeCompare(a.date),
+    sortComparer: (a, b) => {
+        const dateA = a.date || "";  // اطمینان از مقداردهی پیش‌فرض
+        const dateB = b.date || "";
+        return dateB.localeCompare(dateA);  // مقایسه به صورت نزولی
+      },
 });
 
 const initialState = blogAdaptor.getInitialState({
