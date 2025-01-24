@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "https://my-json-server.typicode.com/marziyekavei/veblog" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://zircon-airy-celestite.glitch.me" }),
     tagTypes: ["BLOG", "USER"],
     endpoints: builder => ({
         getBlogs: builder.query({
